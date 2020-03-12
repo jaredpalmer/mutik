@@ -5,7 +5,6 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
 
 - [Quick Start](#quick-start)
   - [Example](#example)
@@ -14,6 +13,8 @@
     - [`store`](#store)
   - [`useSelector<S, V>(selector: (s: S) => V)`](#useselectors-vselector-s-s--v)
   - [`<Provider />`](#provider-)
+  - [Author](#author)
+  - [Inspiration](#inspiration)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -140,3 +141,17 @@ function App() {
   );
 }
 ```
+
+### Author
+
+- Jared Palmer [@jaredpalmer](https://twitter.com/jaredpalmer)
+
+### Inspiration
+
+- [bey](https://gitub.com/jamiebuilds/bey)
+- [react-copy-write](https://github.com/aweary/react-copy-write)
+- [Brian Vaughn's fake redux](https://codesandbox.io/s/react-redux-usemutablesource-eyxoe)
+
+---
+
+> MIT License
