@@ -7,6 +7,9 @@
 ```bash
 yarn add mutik
 ```
+or 
+
+[![Edit Mutik](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/mutik-2so66?fontsize=14&hidenavigation=1&theme=dark)
 
 **Table of Contents**
 
@@ -111,13 +114,24 @@ Create a Mutik `store` given some initial state. The `store` has the following A
 
 ### `useSelector<S, V>(selector: (s: S) => V)`
 
-React hook to subscribe to Mutik state. Must be called underneath a Mutik `Provider`. For performance, it's a good idea to memoize the selector with `React.useCallback`. For example:
+React hook to subscribe to Mutik state. Must be called underneath a Mutik `Provider`.
 
 ```jsx
+const selector = state => state.count;
+
 function Label() {
-  const selector = React.useCallback(state => state.count, []);
   const count = useSelector(selector);
   return <p>The count is {count}</p>;
+}
+```
+
+You can use props with Mutik selector. For performance, it's a good idea to memoize the selector with `React.useCallback`. For example:
+
+```jsx
+function User({ id }) {
+  const selector = React.useCallback(state => state.users[id], [id]);
+  const user = useSelector(selector);
+  return <p>The username is {user.name}</p>;
 }
 ```
 
