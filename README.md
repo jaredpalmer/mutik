@@ -1,4 +1,4 @@
-# Mutik
+<img width="243" alt="Mutik" src="https://user-images.githubusercontent.com/4060187/76576100-81dff980-6497-11ea-93fd-52fc765b9fdc.png">
 
 > A tiny (495B) immutable state management library based on Immer
 
