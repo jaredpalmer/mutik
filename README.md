@@ -7,6 +7,9 @@
 ```bash
 yarn add mutik
 ```
+or 
+
+[![Edit Mutik](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/mutik-2so66?fontsize=14&hidenavigation=1&theme=dark)
 
 **Table of Contents**
 
