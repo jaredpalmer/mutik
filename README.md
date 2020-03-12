@@ -104,7 +104,7 @@ Create a Mutik `store` given some initial state. The `store` has the following A
 | `on(listener: Function): () => void;`                | Subscribe to store. Pass in a callback function that will be executed on updates. `on()` returns the unsubscribe function for your convenience. |
 | `off(listener: Function): void;`                     | Unsubscribe a given listener function                                                                                                           |
 | `reset(): void`                                      | Set state back to the `initialState` used when creating the store                                                                               |
-| `mutate(updater: (draft: Draft) => void | S): void;` | `immer`-style updater function.                                                                                                                 |
+| `mutate(updater: (draft: Draft) => void | S): void;` | Immer-style updater function.                                                                                                                   |
 
 ### `useSelector<S, V>(selector: (s: S) => V)`
 
