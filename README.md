@@ -97,16 +97,14 @@ Create a Mutik `store` given some initial state. The `store` has the following A
 
 #### `store`
 
-| **Method**                             | **Description**                                                                                                                                 |
-| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `get()`                                | Get the current state. Do not use this inside of React, you should instead use [`useSelector`](#useselectors-vselector-s-s--v)                  |
-| `set(nextState: S): void;`             | Set state (the entire thing)                                                                                                                    |
-| `on(listener: Function): () => void;`  | Subscribe to store. Pass in a callback function that will be executed on updates. `on()` returns the unsubscribe function for your convenience. |
-| `off(listener: Function): void;`       | Unsubscribe a given listener function                                                                                                           |
-| `reset(): void`                        | Set state back to the `initialState` used when creating the store                                                                               |
-| mutate(updater: (draft: Draft) => void | S): void;`|`immer`-style updater function.                                                                                                      |
-| `{{submit.id}}`                        | Submission ID                                                                                                                                   |
-| `{{values}}`                           | Values of the submission. Use dot-notation for nested access.                                                                                   |
+| **Method**                                           | **Description**                                                                                                                                 |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `get()`                                              | Get the current state. Do not use this inside of React, you should instead use [`useSelector`](#useselectors-vselector-s-s--v)                  |
+| `set(nextState: S): void;`                           | Set state (the entire thing)                                                                                                                    |
+| `on(listener: Function): () => void;`                | Subscribe to store. Pass in a callback function that will be executed on updates. `on()` returns the unsubscribe function for your convenience. |
+| `off(listener: Function): void;`                     | Unsubscribe a given listener function                                                                                                           |
+| `reset(): void`                                      | Set state back to the `initialState` used when creating the store                                                                               |
+| `mutate(updater: (draft: Draft) => void | S): void;` | `immer`-style updater function.                                                                                                                 |
 
 ### `useSelector<S, V>(selector: (s: S) => V)`
 
