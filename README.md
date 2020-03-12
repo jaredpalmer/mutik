@@ -13,8 +13,8 @@
     - [`store`](#store)
   - [`useSelector<S, V>(selector: (s: S) => V)`](#useselectors-vselector-s-s--v)
   - [`<Provider />`](#provider-)
-  - [Author](#author)
-  - [Inspiration](#inspiration)
+- [Author](#author)
+- [Inspiration](#inspiration)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -142,11 +142,11 @@ function App() {
 }
 ```
 
-### Author
+## Author
 
 - Jared Palmer [@jaredpalmer](https://twitter.com/jaredpalmer)
 
-### Inspiration
+## Inspiration
 
 - [bey](https://gitub.com/jamiebuilds/bey)
 - [react-copy-write](https://github.com/aweary/react-copy-write)
