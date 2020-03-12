@@ -40,8 +40,9 @@ export function createStore<S>(initialState: S): Store<S> {
       this.set(initialState);
     },
     mutate(updater: (draft: Draft<S>) => void | S) {
-      let nextState = immer(currentState, updater);
-      if (nextState !== currentState) this.set(nextState as S);
+      let currState = this.get();
+      let nextState = immer(currState, updater);
+      if (nextState !== currState) this.set(nextState as S);
     },
   };
 }
