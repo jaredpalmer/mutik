@@ -2,12 +2,18 @@
 
 > A tiny (495B) immutable state management library based on Immer
 
+## Quick Start
+
+```bash
+yarn add mutik
+```
+
+**Table of Contents**
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
-- [Quick Start](#quick-start)
-  - [Example](#example)
+- [Example](#example)
 - [API](#api)
   - [`createStore<S>(intialState: S): Store<S>`](#createstoresintialstate-s-stores)
     - [`store`](#store)
@@ -18,13 +24,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Quick Start
-
-```bash
-yarn add mutik
-```
-
-### Example
+## Example
 
 To use Mutik with React, you'll need to install the React and React DOM from the experimental release channel because Mutik uses the recently-merged `useMutableSource` hook internally.
 
