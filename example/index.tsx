@@ -6,6 +6,7 @@ import { Provider, createStore, useSelector, Store } from '../.';
 export interface State {
   count: number;
 }
+
 export const store = createStore<State>({
   count: 0,
 });

@@ -7,7 +7,8 @@
 ```bash
 yarn add mutik
 ```
-or 
+
+or
 
 [![Edit Mutik](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/mutik-2so66?fontsize=14&hidenavigation=1&theme=dark)
 
@@ -73,8 +74,7 @@ function decrement() {
   });
 }
 
-// You don't need to pass it down as props either,
-// although you can if you need to.
+// You don't need to pass the store down as a prop either
 function Buttons() {
   return (
     <React.Fragment>
@@ -84,9 +84,9 @@ function Buttons() {
   );
 }
 
+// Lastly, you can subcribe to "slices" of state with useSelector
+// Note: be sure to memoize these with React.useCallback if you need to select based on props
 function Label() {
-  // You can subcribe to "slices" of mutable state with useSelector
-  // Note: be sure to memoize these with React.useCallback
   const selector = React.useCallback(state => state.count, []);
   const count = useSelector(selector);
   return <p>The count is {count}</p>;

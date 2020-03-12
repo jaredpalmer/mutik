@@ -47,13 +47,13 @@ export function createStore<S>(initialState: S): Store<S> {
   };
 }
 
+// Because the state is immutable,
+// it can be used as the "version".
 function getStoreVersion<S>(store: Store<S>) {
-  // Because the state is immutable,
-  // it can be used as the "version".
   return store.get();
 }
 
-// Subscribe is simple in the case of Redux.
+// Subscribe is simple in the case of Mutik.
 // Since it does not require any seletor-specific logic,
 // it can be declared in module scope.
 function subscribe<S>(store: Store<S>, callback: Listener) {
@@ -73,7 +73,7 @@ export function Provider<S>({
   store: Store<S>;
 }) {
   const mutableSource = React.useMemo(() => {
-    // Wrap the Redux store in a MutableSource object.
+    // Wrap the Mutik store in a MutableSource object.
     // The useMutableSource() hook works with this type of object.
     return (React as any).createMutableSource(store, getStoreVersion);
   }, [store]);
