@@ -5,17 +5,18 @@ A tiny (495B) immutable state management library based on Immer
 ## Quick Start
 
 ```bash
-yarn add mutik
+yarn add mutik 
 ```
 
-**Requirements** 
+
+
+### Example
+ 
 To use Mutik with React, you'll need to install the React and React DOM from the experimental release channel because Mutik uses the recently-merged `useMutableSource` hook internally.
 
 ```bash
 yarn add react@experimental react-dom@experimental
 ```
-
-### Example
 
 ```jsx
 import React from 'react';
