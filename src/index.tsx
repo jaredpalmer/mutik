@@ -3,17 +3,17 @@ import immer, { Draft } from 'immer';
 
 type Listener = Function;
 
+type UpdaterFn<S> = (prevState: S) => S;
+
 export interface Store<S> {
   get(): S;
   set(nextState: S): void;
-  set(nextState: (prevState: S) => S): void;
+  set(updater: UpdaterFn<S>): void;
   on(listener: Function): () => void;
   off(listener: Function): void;
   reset(): void;
   mutate(updater: (draft: Draft<S>) => void | S): void;
 }
-
-type UpdaterFn<S> = (prevState: S) => S;
 
 export function createStore<S>(initialState: S): Store<S> {
   let listeners: Listener[] = [];
@@ -23,11 +23,10 @@ export function createStore<S>(initialState: S): Store<S> {
       return currentState;
     },
     set(nextState: S | UpdaterFn<S>) {
-      if (typeof nextState === 'function') {
-        currentState = (nextState as UpdaterFn<S>)(currentState);
-      } else {
-        currentState = nextState;
-      }
+      currentState =
+        typeof nextState === 'function'
+          ? (nextState as UpdaterFn<S>)(currentState)
+          : nextState;
       listeners.forEach(listener => listener());
     },
     on(listener: Listener) {
@@ -41,9 +40,8 @@ export function createStore<S>(initialState: S): Store<S> {
       this.set(initialState);
     },
     mutate(updater: (draft: Draft<S>) => void | S) {
-      let currState = this.get();
-      let nextState = immer(currState, updater);
-      if (nextState !== currState) this.set(nextState as S);
+      let nextState = immer(currentState, updater);
+      if (nextState !== currentState) this.set(nextState as S);
     },
   };
 }
