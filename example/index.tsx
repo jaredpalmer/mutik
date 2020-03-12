@@ -32,9 +32,10 @@ function Label() {
 
 function Buttons({ store }: { store: Store<State> }) {
   function increment() {
-    store.mutate(state => {
-      state.count++;
-    });
+    store.set(state => ({
+      ...state,
+      count: state.count + 1,
+    }));
   }
 
   function decrement() {

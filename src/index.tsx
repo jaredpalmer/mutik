@@ -6,21 +6,28 @@ type Listener = Function;
 export interface Store<S> {
   get(): S;
   set(nextState: S): void;
+  set(nextState: (prevState: S) => S): void;
   on(listener: Function): () => void;
   off(listener: Function): void;
   reset(): void;
   mutate(updater: (draft: Draft<S>) => void | S): void;
 }
 
-export function createStore<S>(initialState: S) {
+type UpdaterFn<S> = (prevState: S) => S;
+
+export function createStore<S>(initialState: S): Store<S> {
   let listeners: Listener[] = [];
   let currentState = initialState;
   return {
     get() {
       return currentState;
     },
-    set(nextState: S) {
-      currentState = nextState;
+    set(nextState: S | UpdaterFn<S>) {
+      if (typeof nextState === 'function') {
+        currentState = (nextState as UpdaterFn<S>)(currentState);
+      } else {
+        currentState = nextState;
+      }
       listeners.forEach(listener => listener());
     },
     on(listener: Listener) {

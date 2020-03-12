@@ -62,9 +62,11 @@ function increment() {
   });
 }
 
+// Or you can update it like React.useState's update
 function decrement() {
-  store.mutate(state => {
-    state.count--;
+  store.set(prevState => ({
+    ...state,
+    count: state.count - 1
   });
 }
 
@@ -101,7 +103,7 @@ Create a Mutik `store` given some initial state. The `store` has the following A
 | **Method**                                            | **Description**                                                                                                                                 |
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `get()`                                               | Get the current state. Do not use this inside of React, you should instead use [`useSelector`](#useselectors-vselector-s-s--v)                  |
-| `set(nextState: S): void;`                            | Set state (the entire thing)                                                                                                                    |
+| `set(nextState: S | (prevState: S) => V): void;`      | Set state. This can either take a new value or and updater function (just like React.useState's updater)                                        |
 | `on(listener: Function): () => void;`                 | Subscribe to store. Pass in a callback function that will be executed on updates. `on()` returns the unsubscribe function for your convenience. |
 | `off(listener: Function): void;`                      | Unsubscribe a given listener function                                                                                                           |
 | `reset(): void`                                       | Set state back to the `initialState` used when creating the store                                                                               |
