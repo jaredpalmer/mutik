@@ -1,0 +1,47 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "mutik",
+  "author": "Jared Palmer",
+  "module": "dist/mutik.esm.js",
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "husky": "^4.2.3",
+    "react": "^0.0.0-experimental-8b155d261",
+    "react-dom": "^0.0.0-experimental-8b155d261",
+    "tsdx": "^0.12.3",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "immer": "^6.0.1",
+    "tslib": "^1.11.1"
+  }
+}
