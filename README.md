@@ -30,7 +30,7 @@ or
 
 ## Example
 
-To use Mutik with React, you'll need to install the React and React DOM from the experimental release channel because Mutik uses the recently-merged `useMutableSource` hook internally.
+To use Mutik with React, you'll need to install React and React DOM from the experimental release channel because Mutik uses the recently-merged `useMutableSource` hook internally.
 
 ```bash
 yarn add react@experimental react-dom@experimental
