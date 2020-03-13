@@ -164,7 +164,7 @@ function App() {
 
 ## Inspiration
 
-- [bey](https://gitub.com/jamiebuilds/bey)
+- [bey](https://github.com/jamiebuilds/bey)
 - [react-copy-write](https://github.com/aweary/react-copy-write)
 - [Brian Vaughn's fake redux](https://codesandbox.io/s/react-redux-usemutablesource-eyxoe)
 
