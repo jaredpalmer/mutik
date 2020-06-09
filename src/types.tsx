@@ -5,14 +5,18 @@ import { Draft } from 'immer';
  *
  * @public
  */
-export type Listener = () => void;
+export interface Listener {
+  (): void;
+}
 
 /**
  * Mutik updater function
  *
  * @public
  */
-export type UpdaterFn<State> = (prevState: State) => State;
+export interface UpdaterFn<State> {
+  (prevState: State): State;
+}
 
 /**
  * Mutik Store

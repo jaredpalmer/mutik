@@ -136,8 +136,6 @@ export function Provider<S>({ children, store }: ProviderProps<S>) {
  * ```
  *
  * @example
- * You can use props with Mutik selector. For performance, it is a good idea to memoize the selector with `React.useCallback`. For example:
- *
  * ```jsx
  * function User({ id }) {
  *   const selector = React.useCallback(state => state.users[id], [id]);
