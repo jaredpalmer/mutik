@@ -5,7 +5,6 @@ import { Store, Listener, UpdaterFn } from './types';
 /**
  * Create a Mutik `store` given some initial state. The `store` can be used in or out of React.
  *
- * @typeParam State - The type of state to be stored in Mutik
  * @param initialState - Initial store state
  * @returns Mutik store
  * @public
@@ -58,6 +57,7 @@ function subscribe<S>(store: Store<S>, callback: Listener) {
 const MutableSourceContext = React.createContext<Store<unknown>>(null as any);
 
 /**
+ * Mutik Provider component props.
  * @public
  */
 export interface ProviderProps<State> {
@@ -119,9 +119,6 @@ export function Provider<S>({ children, store }: ProviderProps<S>) {
 /**
  * React hook to subscribe to Mutik state. Must be called underneath a Mutik {@link Provider}.
  *
- * @typeParam State - The type of Mutik state
- * @typeParam Value - The type of the value returned by the selector function
- *
  * @param selector - A selector function
  * @returns The slice of Mutik state
  *
@@ -148,7 +145,9 @@ export function Provider<S>({ children, store }: ProviderProps<S>) {
  *
  * @public
  */
-export function useSelector<State, Value>(selector: (s: State) => Value) {
+export function useSelector<State, Value>(
+  selector: (s: State) => Value
+): Value {
   const mutableSource = React.useContext(MutableSourceContext);
   // Pass the store state to user selector:
   const getSnapshot = React.useCallback(store => selector(store.get()), [

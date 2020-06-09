@@ -9,5 +9,5 @@ React children
 <b>Signature:</b>
 
 ```typescript
-children: React_2.ReactNode;
+children: React.ReactNode;
 ```

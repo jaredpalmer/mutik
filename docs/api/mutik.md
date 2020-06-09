@@ -99,7 +99,7 @@ render(<App />, window.root);
 
 |  Interface | Description |
 |  --- | --- |
-|  [ProviderProps](./mutik.providerprops.md) |  |
+|  [ProviderProps](./mutik.providerprops.md) | Mutik Provider component props. |
 |  [Store](./mutik.store.md) | Mutik Store |
 
 ## Type Aliases

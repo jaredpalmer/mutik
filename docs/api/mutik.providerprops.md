@@ -4,17 +4,18 @@
 
 ## ProviderProps interface
 
+Mutik Provider component props.
 
 <b>Signature:</b>
 
 ```typescript
-export declare interface ProviderProps<State> 
+export interface ProviderProps<State> 
 ```
 
 ## Properties
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [children](./mutik.providerprops.children.md) | React\_2.ReactNode | React children |
+|  [children](./mutik.providerprops.children.md) | React.ReactNode | React children |
 |  [store](./mutik.providerprops.store.md) | [Store](./mutik.store.md)<!-- -->&lt;State&gt; | Mutik store |
 

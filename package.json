@@ -12,7 +12,7 @@
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
-    "doc": "api-extractor run --local && api-documenter markdown -i dist -o docs/api"
+    "doc": "api-extractor run --local && api-documenter markdown -i dist -o docs/api && mv temp api"
   },
   "peerDependencies": {
     "react": ">=16"

@@ -9,7 +9,7 @@ Mutik context provider.
 <b>Signature:</b>
 
 ```typescript
-export declare function Provider<S>({ children, store }: ProviderProps<S>): React_2.FunctionComponentElement<React_2.ProviderProps<Store<unknown>>>;
+export declare function Provider<S>({ children, store }: ProviderProps<S>): React.FunctionComponentElement<React.ProviderProps<Store<unknown>>>;
 ```
 
 ## Parameters
@@ -20,7 +20,7 @@ export declare function Provider<S>({ children, store }: ProviderProps<S>): Reac
 
 <b>Returns:</b>
 
-React\_2.FunctionComponentElement&lt;React\_2.ProviderProps&lt;[Store](./mutik.store.md)<!-- -->&lt;unknown&gt;&gt;&gt;
+React.FunctionComponentElement&lt;React.ProviderProps&lt;[Store](./mutik.store.md)<!-- -->&lt;unknown&gt;&gt;&gt;
 
 ## Remarks
 

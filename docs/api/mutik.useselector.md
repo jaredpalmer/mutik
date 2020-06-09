@@ -9,7 +9,7 @@ React hook to subscribe to Mutik state. Must be called underneath a Mutik [Provi
 <b>Signature:</b>
 
 ```typescript
-export declare function useSelector<State, Value>(selector: (s: State) => Value): any;
+export declare function useSelector<State, Value>(selector: (s: State) => Value): Value;
 ```
 
 ## Parameters
@@ -20,7 +20,7 @@ export declare function useSelector<State, Value>(selector: (s: State) => Value)
 
 <b>Returns:</b>
 
-any
+Value
 
 The slice of Mutik state
 

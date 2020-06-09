@@ -7,21 +7,19 @@
 import { Draft } from 'immer';
 import * as React_2 from 'react';
 
-// Warning: (ae-forgotten-export) The symbol "Store" needs to be exported by the entry point index.d.ts
-//
 // @public
-export function createStore<State>(initialState: State): Store_2<State>;
+export function createStore<State>(initialState: State): Store<State>;
 
 // @public
 export type Listener = () => void;
 
 // @public
-export function Provider<S>({ children, store }: ProviderProps<S>): React_2.FunctionComponentElement<React_2.ProviderProps<Store_2<unknown>>>;
+export function Provider<S>({ children, store }: ProviderProps<S>): React_2.FunctionComponentElement<React_2.ProviderProps<Store<unknown>>>;
 
-// @public (undocumented)
+// @public
 export interface ProviderProps<State> {
     children: React_2.ReactNode;
-    store: Store_2<State>;
+    store: Store<State>;
 }
 
 // @public
@@ -39,7 +37,7 @@ export interface Store<State> {
 export type UpdaterFn<State> = (prevState: State) => State;
 
 // @public
-export function useSelector<State, Value>(selector: (s: State) => Value): any;
+export function useSelector<State, Value>(selector: (s: State) => Value): Value;
 
 
 ```
