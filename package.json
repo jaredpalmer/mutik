@@ -11,7 +11,8 @@
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
-    "prepare": "tsdx build"
+    "prepare": "tsdx build",
+    "doc": "api-extractor run --local && api-documenter markdown -i dist -o docs/api"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -31,14 +32,19 @@
   "author": "Jared Palmer",
   "module": "dist/mutik.esm.js",
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.8.10",
+    "@microsoft/api-extractor": "^7.8.10",
     "@types/jest": "^25.1.4",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
+    "execa": "^4.0.2",
+    "fs-extra": "^9.0.1",
     "husky": "^4.2.3",
     "react": "^0.0.0-experimental-8b155d261",
     "react-dom": "^0.0.0-experimental-8b155d261",
-    "tsdx": "^0.12.3",
-    "typescript": "^3.8.3"
+    "readline": "^1.3.0",
+    "tsdx": "^0.13.2",
+    "typescript": "^3.9.5"
   },
   "dependencies": {
     "immer": "^6.0.1",

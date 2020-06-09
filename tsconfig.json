@@ -6,11 +6,13 @@
     "lib": ["dom", "esnext"],
     "importHelpers": true,
     "declaration": true,
+    "declarationMap": true,
+    "emitDecoratorMetadata": true,
     "sourceMap": true,
-    "rootDir": "./",
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
+    "removeComments": false,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
     "noImplicitThis": true,
@@ -21,10 +23,12 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "baseUrl": "./",
+    "rootDir": "src",
     "paths": {
       "*": ["src/*", "node_modules/*"]
     },
     "jsx": "react",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true
   }
 }

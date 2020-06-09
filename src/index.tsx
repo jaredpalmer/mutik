@@ -1,97 +1,85 @@
-import * as React from 'react';
-import immer, { Draft } from 'immer';
-
-type Listener = Function;
-
-type UpdaterFn<S> = (prevState: S) => S;
-
-export interface Store<S> {
-  get(): S;
-  set(nextState: S): void;
-  set(updater: UpdaterFn<S>): void;
-  on(listener: Function): () => void;
-  off(listener: Function): void;
-  reset(): void;
-  mutate(updater: (draft: Draft<S>) => void | S): void;
-}
-
-export function createStore<S>(initialState: S): Store<S> {
-  let listeners: Listener[] = [];
-  let currentState = initialState;
-  return {
-    get() {
-      return currentState;
-    },
-    set(nextState: S | UpdaterFn<S>) {
-      currentState =
-        typeof nextState === 'function'
-          ? (nextState as UpdaterFn<S>)(currentState)
-          : nextState;
-      listeners.forEach(listener => listener());
-    },
-    on(listener: Listener) {
-      listeners.push(listener);
-      return () => this.off(listener);
-    },
-    off(listener: Listener) {
-      listeners = listeners.filter(fn => fn !== listener);
-    },
-    reset() {
-      this.set(initialState);
-    },
-    mutate(updater: (draft: Draft<S>) => void | S) {
-      let currState = this.get();
-      let nextState = immer(currState, updater);
-      if (nextState !== currState) this.set(nextState as S);
-    },
-  };
-}
-
-// Because the state is immutable,
-// it can be used as the "version".
-function getStoreVersion<S>(store: Store<S>) {
-  return store.get();
-}
-
-// Subscribe is simple in the case of Mutik.
-// Since it does not require any seletor-specific logic,
-// it can be declared in module scope.
-function subscribe<S>(store: Store<S>, callback: Listener) {
-  return store.on(callback);
-}
-
-const MutableSourceContext = React.createContext<Store<unknown>>(null as any);
-
-// This mimics the current Redux <Provider> API.
-// It shares the store (really now a MutableSource wrapper)
-// with components below in the tree that read from the store.
-export function Provider<S>({
-  children,
-  store,
-}: {
-  children: React.ReactNode;
-  store: Store<S>;
-}) {
-  const mutableSource = React.useMemo(() => {
-    // Wrap the Mutik store in a MutableSource object.
-    // The useMutableSource() hook works with this type of object.
-    return (React as any).createMutableSource(store, getStoreVersion);
-  }, [store]);
-
-  return React.createElement(
-    MutableSourceContext.Provider,
-    { value: mutableSource },
-    children
-  );
-}
-
-// It requires a selector and returns a derived store value.
-export function useSelector<S, V>(selector: (s: S) => V) {
-  const mutableSource = React.useContext(MutableSourceContext);
-  // Pass the store state to user selector:
-  const getSnapshot = React.useCallback(store => selector(store.get()), [
-    selector,
-  ]);
-
-  return (React as any).useMutableSource(mutableSource, getSnapshot, subscribe);
-}
+/**
+ *
+ *
+ * A tiny (495B) immutable state management library based on Immer
+ *
+ * @remarks
+ * Quick Start
+ *
+ * ```bash
+ * yarn add mutik
+ * ```
+ *
+ * or
+ *
+ * {@link https://codesandbox.io/s/mutik-2so66?fontsize=14&hidenavigation=1&theme=dark | Edit on Codesandbox}
+ *
+ * @example
+ * To use Mutik with React, you'll need to install React and React DOM from the experimental release channel because Mutik uses the recently-merged `useMutableSource` hook internally.
+ *
+ * ```bash
+ * yarn add react@experimental react-dom@experimental
+ * ```
+ *
+ * ```jsx
+ * import React from 'react';
+ * import { render } from 'react-dom';
+ * import { createStore, Provider, useSelector } from 'mutik';
+ *
+ * // Create a lil' store with some state
+ * let store = createStore({
+ *   count: 0,
+ * });
+ *
+ * // Pass the store to the Provider.
+ * function App() {
+ *   return (
+ *     <Provider store={store}>
+ *       <div>
+ *         <Label />
+ *         <Buttons />
+ *       </div>
+ *     </Provider>
+ *   );
+ * }
+ *
+ * // You can mutate the store from anywhere you want to,
+ * // even outside of React code. Mutate is based on immer.
+ * function increment() {
+ *   store.mutate(state => {
+ *     state.count++;
+ *   });
+ * }
+ *
+ * // Or you can update it like `React.useState`'s update
+ * function decrement() {
+ *   store.set(prevState => ({
+ *     ...state,
+ *     count: state.count - 1
+ *   });
+ * }
+ *
+ * // You don't need to pass the store down as a prop either
+ * function Buttons() {
+ *   return (
+ *     <React.Fragment>
+ *       <button onClick={decrement}>-</button>
+ *       <button onClick={increment}>+</button>
+ *     </React.Fragment>
+ *   );
+ * }
+ *
+ * // Lastly, you can subcribe to "slices" of state with `useSelector`
+ * // Note: be sure to memoize these with `React.useCallback` if you need to select based on props
+ * function Label() {
+ *   const selector = React.useCallback(state => state.count, []);
+ *   const count = useSelector(selector);
+ *   return <p>The count is {count}</p>;
+ * }
+ *
+ * render(<App />, window.root);
+ * ```
+ * @packageDocumentation
+ */
+export { Store, Listener, UpdaterFn } from './types';
+export { createStore, Provider, ProviderProps, useSelector } from './Mutik';
