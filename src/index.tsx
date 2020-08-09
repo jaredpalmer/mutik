@@ -75,7 +75,7 @@ export function Provider<S>({
   const mutableSource = React.useMemo(() => {
     // Wrap the Mutik store in a MutableSource object.
     // The useMutableSource() hook works with this type of object.
-    return (React as any).createMutableSource(store, getStoreVersion);
+    return (React as any).unstable_createMutableSource(store, getStoreVersion);
   }, [store]);
 
   return React.createElement(
@@ -93,5 +93,5 @@ export function useSelector<S, V>(selector: (s: S) => V) {
     selector,
   ]);
 
-  return (React as any).useMutableSource(mutableSource, getSnapshot, subscribe);
+  return (React as any).unstable_useMutableSource(mutableSource, getSnapshot, subscribe);
 }
