@@ -37,7 +37,7 @@
     "husky": "^4.2.3",
     "react": "^0.0.0-experimental-8b155d261",
     "react-dom": "^0.0.0-experimental-8b155d261",
-    "tsdx": "^0.12.3",
+    "tsdx": "^0.14.1",
     "typescript": "^3.8.3"
   },
   "dependencies": {
