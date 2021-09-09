@@ -93,5 +93,9 @@ export function useSelector<S, V>(selector: (s: S) => V) {
     selector,
   ]);
 
-  return (React as any).unstable_useMutableSource(mutableSource, getSnapshot, subscribe);
+  return (React as any).unstable_useMutableSource(
+    mutableSource,
+    getSnapshot,
+    subscribe
+  );
 }
