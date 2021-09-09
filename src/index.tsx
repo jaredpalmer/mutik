@@ -86,12 +86,16 @@ export function Provider<S>({
 }
 
 // It requires a selector and returns a derived store value.
-export function useSelector<S, V>(selector: (s: S) => V) {
+export function useSelector<S, V>(selector: (s: S) => V): V {
   const mutableSource = React.useContext(MutableSourceContext);
   // Pass the store state to user selector:
   const getSnapshot = React.useCallback(store => selector(store.get()), [
     selector,
   ]);
 
-  return (React as any).unstable_useMutableSource(mutableSource, getSnapshot, subscribe);
+  return (React as any).unstable_useMutableSource(
+    mutableSource,
+    getSnapshot,
+    subscribe
+  );
 }
