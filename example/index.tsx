@@ -1,33 +1,30 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider, createStore, useSelector, Store } from '../.';
+import { createStore, Store } from '../.';
 
 export interface State {
   count: number;
 }
 
-export const store = createStore<State>({
+export const [store, useStore] = createStore<State>({
   count: 0,
 });
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <div>
-        <Label />
-        <Buttons store={store} />
-        <ResetButton />
-      </div>
-    </Provider>
+    <div>
+      <Label />
+      <Buttons store={store} />
+      <ResetButton />
+    </div>
   );
 };
 
 function Label() {
   // Since our Mutik state is just the  { count } itself,
   // our selector is very simple!
-  const selector = React.useCallback(state => state.count, []);
-  const count = useSelector(selector);
+  const count = useStore(state => state.count);
   return <p>The count is {count}</p>;
 }
 
@@ -44,6 +41,7 @@ function Buttons({ store }: { store: Store<State> }) {
       state.count--;
     });
   }
+
   return (
     <>
       <button onClick={decrement}>Decrement</button>
