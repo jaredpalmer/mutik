@@ -1,6 +1,6 @@
 <img width="243" alt="Mutik" src="https://user-images.githubusercontent.com/4060187/76576100-81dff980-6497-11ea-93fd-52fc765b9fdc.png">
 
-> A tiny (495B) immutable state management library based on Immer
+> A tiny (696B) immutable state management library based on Immer
 
 ## Quick Start
 
@@ -19,10 +19,9 @@ or
 
 - [Example](#example)
 - [API](#api)
-  - [`createStore<S>(intialState: S): Store<S>`](#createstoresintialstate-s-stores)
+  - [`createStore<State>(intialState: State): [Store<State>, useStore<Value>(selector: (state: State) => Value): Value]`](#createstorestateintialstate-state-storestate-usestorevalueselector-state-state--value-value)
     - [`store`](#store)
-  - [`useSelector<S, V>(selector: (s: S) => V)`](#useselectors-vselector-s-s--v)
-  - [`<Provider />`](#provider-)
+    - [`useStore<Value>(selector: (state: State) => Value): Value`](#usestorevalueselector-state-state--value-value)
 - [Author](#author)
 - [Inspiration](#inspiration)
 
@@ -30,31 +29,23 @@ or
 
 ## Example
 
-To use Mutik with React, you'll need to install React and React DOM from the experimental release channel because Mutik uses the recently-merged `useMutableSource` hook internally.
-
-```bash
-yarn add react@experimental react-dom@experimental
-```
-
 ```jsx
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, Provider, useSelector } from 'mutik';
 
 // Create a lil' store with some state
-let store = createStore({
+let [store, useStore] = createStore({
   count: 0,
 });
 
-// Pass the store to the Provider.
+// The app doesn't need a provider
 function App() {
   return (
-    <Provider store={store}>
-      <div>
-        <Label />
-        <Buttons />
-      </div>
-    </Provider>
+    <div>
+      <Label />
+      <Buttons />
+    </div>
   );
 }
 
@@ -84,11 +75,11 @@ function Buttons() {
   );
 }
 
-// Lastly, you can subcribe to "slices" of state with useSelector
-// Note: be sure to memoize these with React.useCallback if you need to select based on props
+// Lastly, you can subcribe to "slices" of state by passing a selector to use
+// state. The component will only be re-rendered when that portion of state
+// re-renders.
 function Label() {
-  const selector = React.useCallback(state => state.count, []);
-  const count = useSelector(selector);
+  const count = useStore(state => state.count);
   return <p>The count is {count}</p>;
 }
 
@@ -97,7 +88,7 @@ render(<App />, window.root);
 
 ## API
 
-### `createStore<S>(intialState: S): Store<S>`
+### `createStore<State>(intialState: State): [Store<State>, useStore<Value>(selector: (state: State) => Value): Value]`
 
 Create a Mutik `store` given some initial state. The `store` has the following API you can use in or out of React.
 
@@ -112,9 +103,9 @@ Create a Mutik `store` given some initial state. The `store` has the following A
 | `reset(): void`                                       | Set state back to the `initialState` used when creating the store                                                                               |
 | `mutate(updater: (draft: Draft) => void \| S): void;` | Immer-style updater function.                                                                                                                   |
 
-### `useSelector<S, V>(selector: (s: S) => V)`
+#### `useStore<Value>(selector: (state: State) => Value): Value`
 
-React hook to subscribe to Mutik state. Must be called underneath a Mutik `Provider`.
+React hook to subscribe to Mutik state.
 
 ```jsx
 const selector = state => state.count;
@@ -125,36 +116,12 @@ function Label() {
 }
 ```
 
-You can use props with Mutik selector. For performance, it's a good idea to memoize the selector with `React.useCallback`. For example:
+You can use props with Mutik selector.
 
 ```jsx
 function User({ id }) {
-  const selector = React.useCallback(state => state.users[id], [id]);
-  const user = useSelector(selector);
+  const user = useSelector(state => state.users[id]);
   return <p>The username is {user.name}</p>;
-}
-```
-
-### `<Provider />`
-
-Mutik context provider. Pass your store as `store` prop. For example:
-
-```jsx
-import React from 'react';
-import { createStore, Provider } from 'mutik';
-
-// Create a lil' store with some state
-let store = createStore({
-  count: 0,
-});
-
-// Pass the store to the Provider.
-function App() {
-  return (
-    <Provider store={store}>
-      <div>{/* ... stuff */}</div>
-    </Provider>
-  );
 }
 ```
 
