@@ -35,8 +35,8 @@
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
     "husky": "^4.2.3",
-    "react": "^0.0.0-experimental-8b155d261",
-    "react-dom": "^0.0.0-experimental-8b155d261",
+    "react": "^0.0.0-experimental-8f96c6b2a-20210909",
+    "react-dom": "^0.0.0-experimental-8f96c6b2a-20210909",
     "tsdx": "^0.14.1",
     "typescript": "^3.8.3"
   },
